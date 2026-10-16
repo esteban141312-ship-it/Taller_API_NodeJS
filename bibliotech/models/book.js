@@ -71,7 +71,7 @@ availableCopies:{
 
 },
 
-Active:{
+active:{
     type:Boolean,
     default:true
 }
