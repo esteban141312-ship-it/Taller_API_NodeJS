@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
+// import dotenv from "dotenv";
+import 'dotenv/config';
 import { dbConection } from "./database/config.js";
 
 import authorsRoutes from "./routes/authors.routes.js";
@@ -10,15 +10,16 @@ import booksRoutes from "./routes/books.routes.js";
 import { logger } from "./middlewares/logger.js";
 import { notFound } from "./middlewares/notFound.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import authRoutes from "./routes/auth.routes.js";
 
-dotenv.config();
+// dotenv.config();
 
 class Server {
     constructor(){
         this.app = express();
         this.port = process.env.PORT || 3000;
 
-        this.connectDB();
+        // this.connectDB();
 
         this.middlewares();
         this.routes();
@@ -38,6 +39,7 @@ class Server {
     routes(){
         this.app.use("/api/authors", authorsRoutes);
         this.app.use("/api/books", booksRoutes);
+        this.app.use("/api/auth", authRoutes);
     }
 
     errors(){
