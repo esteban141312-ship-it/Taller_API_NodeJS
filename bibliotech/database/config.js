@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
-export const dbCotection = async () => {
+export const dbConection = async () => {
     try{
+        console.log(process.env.MONGO_URL)
         await mongoose.connect(process.env.MONGO_URL);
         console.log("Base de datos conectada");
 
