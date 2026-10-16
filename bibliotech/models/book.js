@@ -22,7 +22,7 @@ const bookSchema = new mongoose.Schema({
                 const Autor = mongoose.model('author');
 
                 // Buscar si existe un autor con ese ID y activo === true
-                const autorExistente = await Autor.findOne({ _id: id, activo: true });
+                const autorExistente = await Autor.findOne({ _id: id, active: true });
 
                 // Retorna true si existe y está activo, o false si no
                 return !!autorExistente;
