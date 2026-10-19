@@ -8,7 +8,7 @@ const bookSchema = new mongoose.Schema({
 
     isbn: {
         type: String, required: true, unique: true, trim: true,
-        match: [/^\d{10,13}$/]
+        match: [/^(\d{10}|\d{13})$/]
     },
 
     author: {
@@ -33,6 +33,7 @@ const bookSchema = new mongoose.Schema({
     },
 
     genre: { type: String,
+        required: true,
         enum: {
       values: ['novela', 'cuento', 'poesia', 'ensayo','tecnologia','historia','infantil'],
       message: '{VALUE} no es un estado válido'
@@ -54,7 +55,7 @@ const bookSchema = new mongoose.Schema({
         
     },
 
-    totalCopies:{type:Number,required:true,
+    totalCopies:{type:Number,required:true, min: 1,
         validate:{validator: Number.isInteger,
             message: '{VALUE} no es un numero entero'
         },

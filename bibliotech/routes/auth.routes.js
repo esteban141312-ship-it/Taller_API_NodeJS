@@ -10,19 +10,17 @@ import {
 import { validarCampos } from "../middlewares/validarCampos.js";
 import { validarJWT } from "../middlewares/validarJwt.js";
 
-import {
-  emailExiste
-} from "../errores/helpers/dbValidators.js";
+import { emailExiste } from "../helpers/db-validators.js";
 
 const router = Router();
 
 router.post(
   "/register",
   [
-    check("name").isLength({ min: 3 }),
-    check("email").isEmail(),
+    check("name", "El nombre debe tener entre 3 y 60 caracteres").isLength({ min: 3, max: 60 }),
+    check("email", "El correo no es válido").isEmail().normalizeEmail(),
     check("email").custom(emailExiste),
-    check("password").isLength({ min: 6 }),
+    check("password", "La contraseña debe tener mínimo 6 caracteres").isLength({ min: 6 }),
     validarCampos
   ],
   register
@@ -31,8 +29,8 @@ router.post(
 router.post(
   "/login",
   [
-    check("email").isEmail(),
-    check("password").notEmpty(),
+    check("email", "El correo no es válido").isEmail().normalizeEmail(),
+    check("password", "La contraseña es obligatoria").notEmpty(),
     validarCampos
   ],
   login

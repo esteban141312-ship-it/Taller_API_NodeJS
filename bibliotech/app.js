@@ -1,17 +1,9 @@
+import "dotenv/config";
 import Server from "./server.js";
-// new Server().listen();
+import { dbConnection } from "./database/config.js";
 
-import { dbConection } from "./database/config.js";
-import dotenv from "dotenv";
-dotenv.config();
-
-
-
-// const server = new Server();
-
-// server.listen();
 const main = async () => {
-  await dbConection();
+  await dbConnection();
 
   const server = new Server();
   server.listen();

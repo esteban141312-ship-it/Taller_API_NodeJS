@@ -1,15 +1,15 @@
 import bcrypt from "bcryptjs";
 
 import User from "../models/user.js";
-import { generarJWT } from "../errores/helpers/generar-jwt.js";
+import { generarJWT } from "../helpers/generar-jwt.js";
 
 export const register = async (req, res, next) => {
 
   try {
 
-    const { password, ...rest } = req.body;
+    const { name, email, password } = req.body;
 
-    const user = new User(rest);
+    const user = new User({ name, email, role: "USER" });
 
     const salt = bcrypt.genSaltSync();
 
@@ -44,7 +44,7 @@ export const login = async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
-    if (!user) {
+    if (!user || !user.active) {
 
       return res.status(401).json({
         ok: false,
@@ -85,11 +85,17 @@ export const login = async (req, res, next) => {
 
 };
 
-export const me = async (req, res) => {
+export const me = async (req, res, next) => {
 
-  res.json({
-    ok: true,
-    data: req.user
-  });
+  try {
+
+    res.json({
+      ok: true,
+      data: req.user
+    });
+
+  } catch (error) {
+    next(error);
+  }
 
 };

@@ -1,0 +1,615 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "bibliotech_api",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "register",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "register",
+        "tags": [
+          "autenticacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "name": "Usuario Prueba",
+                "email": "usuario@gmail.com",
+                "password": "123456"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "login",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "login",
+        "tags": [
+          "autenticacion"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "email": "joan@gmail.com",
+                "password": "123456"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "summary": "usuario actual",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "usuario_actual",
+        "tags": [
+          "autenticacion"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/authors": {
+      "get": {
+        "summary": "listar autores",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "listar_autores",
+        "tags": [
+          "autores"
+        ]
+      },
+      "post": {
+        "summary": "crear autor",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "crear_autor",
+        "tags": [
+          "autores"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "name": "Julio Verne",
+                "nationality": "Francesa",
+                "birthYear": 1828
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/authors/6ad29090e269c3e92e833c71": {
+      "get": {
+        "summary": "consultar autor",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "consultar_autor",
+        "tags": [
+          "autores"
+        ]
+      },
+      "put": {
+        "summary": "actualizar autor",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "actualizar_autor",
+        "tags": [
+          "autores"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "nationality": "Colombia"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "eliminar autor",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "eliminar_autor",
+        "tags": [
+          "autores"
+        ]
+      }
+    },
+    "/api/books": {
+      "get": {
+        "summary": "listar libros",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "listar_libros",
+        "tags": [
+          "libros"
+        ]
+      },
+      "post": {
+        "summary": "crear libro",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "crear_libro",
+        "tags": [
+          "libros"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "title": "Viaje al centro de la tierra",
+                "isbn": "9780307474728",
+                "author": "6ad29090e269c3e92e833c71",
+                "genre": "novela",
+                "year": 1864,
+                "totalCopies": 3
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/books/6ad2ad0cbe3d0d955ef1e58b": {
+      "get": {
+        "summary": "consultar libros",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "consultar_libros",
+        "tags": [
+          "libros"
+        ]
+      },
+      "put": {
+        "summary": "actualizar libro",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "actualizar_libro",
+        "tags": [
+          "libros"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "totalCopies": 7
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "eliminar libro",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "eliminar_libro",
+        "tags": [
+          "libros"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/books/available": {
+      "get": {
+        "summary": "libros disponibles",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "libros_disponibles",
+        "tags": [
+          "libros"
+        ]
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "listar",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "listar",
+        "tags": [
+          "usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/users/6ad2b0e417666ce61a49fa02/role": {
+      "patch": {
+        "summary": "cambiar rol",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "cambiar_rol",
+        "tags": [
+          "usuarios"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "role": "ADMIN"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/loans": {
+      "post": {
+        "summary": "crear prestamo",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "crear_prestamo",
+        "tags": [
+          "prestamos"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "book": "6ad2ad0cbe3d0d955ef1e58b"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "listar prestamos",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "listar_prestamos",
+        "tags": [
+          "prestamos"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/loans/me": {
+      "get": {
+        "summary": "listar mis prestamos",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "listar_mis_prestamos",
+        "tags": [
+          "prestamos"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/loans/overdue": {
+      "get": {
+        "summary": "prestamos vencidos",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "prestamos_vencidos",
+        "tags": [
+          "prestamos"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/loans/6ad6752177fc3a93a9c8d64b/return": {
+      "patch": {
+        "summary": "devolver prestamos",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "devolver_prestamos",
+        "tags": [
+          "prestamos"
+        ],
+        "parameters": [
+          {
+            "name": "x-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI"
+          }
+        ]
+      }
+    },
+    "/api/jjjsjd": {
+      "get": {
+        "summary": "404",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "404",
+        "tags": [
+          "pruebas de error"
+        ]
+      }
+    },
+    "/api/books/abc": {
+      "get": {
+        "summary": "400 id invalido",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "operationId": "400_id_invalido",
+        "tags": [
+          "pruebas de error"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "autenticacion"
+    },
+    {
+      "name": "autores"
+    },
+    {
+      "name": "libros"
+    },
+    {
+      "name": "usuarios"
+    },
+    {
+      "name": "prestamos"
+    },
+    {
+      "name": "pruebas de error"
+    }
+  ],
+  "x-hoppscotch-folder-tags": "slash",
+  "x-hoppscotch-dropped-requests": [
+    {
+      "tagPath": "pruebas de error",
+      "request": {
+        "v": "17",
+        "endpoint": "http://localhost:3000/api/authors",
+        "name": "token requerido 401",
+        "params": [],
+        "headers": [],
+        "method": "POST",
+        "auth": {
+          "authType": "none",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "_ref_id": "req_mvfok8ll_19e47e25-24de-40a4-beed-baf3bcab87a6",
+        "description": null
+      }
+    },
+    {
+      "tagPath": "pruebas de error",
+      "request": {
+        "v": "17",
+        "endpoint": "http://localhost:3000/api/authors/6ad29090e269c3e92e833c71",
+        "name": "409 autor con libros",
+        "params": [],
+        "headers": [
+          {
+            "key": "x-token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2YWQyYjAwN2JlM2QwZDk1NWVmMWU1OGMiLCJpYXQiOjE3OTI0MzU2MDUsImV4cCI6MTc5MjQ1MDAwNX0.385SBgVfYSMoC8wTbEaiFriv88G6U1Y-tBW_yOJEShI",
+            "active": true,
+            "description": ""
+          }
+        ],
+        "method": "DELETE",
+        "auth": {
+          "authType": "none",
+          "authActive": true
+        },
+        "preRequestScript": "",
+        "testScript": "",
+        "body": {
+          "contentType": null,
+          "body": null
+        },
+        "requestVariables": [],
+        "responses": {},
+        "_ref_id": "req_mvfom2hd_989bed39-2e37-4fa9-b57e-62788df0903c",
+        "description": null
+      }
+    }
+  ]
+}

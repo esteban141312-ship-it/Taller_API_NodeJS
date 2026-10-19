@@ -6,7 +6,10 @@ export const validarCampos = (req, res, next) => {
   if (!errores.isEmpty()) {
     return res.status(400).json({
       ok: false,
-      errors: errores.array()
+      errors: errores.array().map((error) => ({
+        field: error.path,
+        msg: error.msg
+      }))
     });
   }
 
