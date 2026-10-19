@@ -10,7 +10,7 @@ const LoanSchema = new Schema(
 
     book: {
       type: Schema.Types.ObjectId,
-      ref: "Book",
+      ref: "book",
       required: true
     },
 

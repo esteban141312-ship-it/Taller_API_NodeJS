@@ -3,10 +3,37 @@ import Book from "../models/book.js";
 
 export const getBooks = async (req, res, next) => {
     try {
-        const books = await Book.find({ active: true })
-            .populate("author", "name");
+        const page = Number(req.query.page) || 1;
+        const limit = Math.min(Number(req.query.limit) || 10, 50);
+        const filter = { active: true };
 
-        res.json({ ok: true, data: books });
+        if (req.query.genre) {
+            filter.genre = req.query.genre;
+        }
+
+        if (req.query.author) {
+            filter.author = req.query.author;
+        }
+
+        if (req.query.q) {
+            filter.title = { $regex: req.query.q, $options: "i" };
+        }
+
+        const total = await Book.countDocuments(filter);
+        const books = await Book.find(filter)
+            .populate("author", "name")
+            .sort(req.query.sort || "title")
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        res.json({
+            ok: true,
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit),
+            data: books
+        });
     } catch (error) {
         next(error);
     }
@@ -65,23 +92,38 @@ export const updateBook = async (req, res, next) => {
             });
         }
 
-        if (req.body.totalCopies !== undefined) {
+        if (req.body.active === false) {
+            const Loan = (await import("../models/loan.js")).default;
+            const loan = await Loan.findOne({ book: req.params.id, status: "ACTIVE" });
+
+            if (loan) {
+                return res.status(409).json({
+                    ok: false, msg: "El libro tiene préstamos activos"
+                });
+            }
+        }
+
+        const { availableCopies, ...data } = req.body;
+
+        if (data.totalCopies !== undefined) {
             const prestadas = book.totalCopies - book.availableCopies;
 
-            if (req.body.totalCopies < prestadas) {
+            if (data.totalCopies < prestadas) {
                 return res.status(400).json({
                     ok: false, msg: "No puedes reducir las copias prestadas"
                 });
             }
 
-            req.body.availableCopies =
-                req.body.totalCopies - prestadas;
+            data.availableCopies = data.totalCopies - prestadas;
         }
 
-        Object.assign(book, req.body);
-        await book.save();
+        const updatedBook = await Book.findByIdAndUpdate(
+            req.params.id,
+            data,
+            { returnDocument: "after", runValidators: true }
+        );
 
-        res.json({ ok: true, data: book });
+        res.json({ ok: true, data: updatedBook });
     } catch (error) {
         next(error);
     }
@@ -104,7 +146,7 @@ export const deleteBook = async (req, res, next) => {
         const book = await Book.findByIdAndUpdate(
             req.params.id,
             { active: false },
-            { returnDocument: "after" }
+            { returnDocument: "after", runValidators: true }
         );
 
         if (!book) {

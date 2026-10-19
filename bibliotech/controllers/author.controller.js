@@ -42,6 +42,17 @@ export const createAuthor = async (req, res, next) => {
 
 export const updateAuthor = async (req, res, next) => {
     try {
+        if (req.body.active === false) {
+            const Book = (await import("../models/book.js")).default;
+            const book = await Book.findOne({ author: req.params.id, active: true });
+
+            if (book) {
+                return res.status(409).json({
+                    ok: false, msg: "El autor tiene libros activos"
+                });
+            }
+        }
+
         const author = await Author.findByIdAndUpdate(
             req.params.id,
             req.body,
@@ -77,7 +88,7 @@ export const deleteAuthor = async (req, res, next) => {
         const author = await Author.findByIdAndUpdate(
             req.params.id,
             { active: false },
-            { returnDocument: "after" }
+            { returnDocument: "after", runValidators: true }
         );
 
         if (!author) {

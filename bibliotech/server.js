@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 // import dotenv from "dotenv";
 import 'dotenv/config';
-import { dbConection } from "./database/config.js";
 
 import authorsRoutes from "./routes/authors.routes.js";
 import booksRoutes from "./routes/books.routes.js";
@@ -11,6 +10,8 @@ import { logger } from "./middlewares/logger.js";
 import { notFound } from "./middlewares/notFound.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import authRoutes from "./routes/auth.routes.js";
+import usersRoutes from "./routes/users.routes.js";
+import loansRoutes from "./routes/loans.routes.js";
 
 // dotenv.config();
 
@@ -26,10 +27,6 @@ class Server {
         this.errors();
     }
 
-    async connectDB(){
-        await dbConection();
-    }
-
     middlewares(){
         this.app.use(cors());
         this.app.use(express.json());
@@ -40,6 +37,8 @@ class Server {
         this.app.use("/api/authors", authorsRoutes);
         this.app.use("/api/books", booksRoutes);
         this.app.use("/api/auth", authRoutes);
+        this.app.use("/api/users", usersRoutes);
+        this.app.use("/api/loans", loansRoutes);
     }
 
     errors(){
