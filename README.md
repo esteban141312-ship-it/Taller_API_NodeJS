@@ -1,11 +1,14 @@
 BiblioTech API
-Integrantes
+
+Integrantes:
+
 Joan Esteban Buitrago,
 Rey Sebastian Diaz,
 Elder Jhonatan
 
-Descripción
+Descripción:
 API REST para la gestión de biblioteca.
+
 
 Instalación
 npm install
@@ -15,6 +18,7 @@ PORT= MONGO_URL= JWT_SECRET=
 
 Ejecución
 npm run dev
+
 
 Endpoints principales
 Auth
