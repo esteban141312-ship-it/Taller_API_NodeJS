@@ -19,6 +19,8 @@ export const validarJWT = async (req, res, next) => {
       process.env.JWT_SECRET
     );
 
+    
+
     const user = await User.findById(uid);
 
     if (!user || !user.active) {

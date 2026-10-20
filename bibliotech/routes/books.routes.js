@@ -1,14 +1,7 @@
 import { Router } from "express";
 import { check } from "express-validator";
 
-import {
-    getBooks,
-    getAvailableBooks,
-    getBook,
-    createBook,
-    updateBook,
-    deleteBook
-} from "../controllers/book.controller.js";
+import { getBooks,getAvailableBooks,getBook,createBook,updateBook,deleteBook} from "../controllers/book.controller.js";
 
 import { validarCampos } from "../middlewares/validarCampos.js";
 import { validarJWT } from "../middlewares/validarJwt.js";
@@ -17,8 +10,7 @@ import { existeAutorPorId, isbnExiste } from "../helpers/db-validators.js";
 
 const router = Router();
 
-router.get("/", [
-    check("page", "La página debe ser un entero mayor a 0").optional().isInt({ min: 1 }),
+router.get("/", [ check("page", "La página debe ser un entero mayor a 0").optional().isInt({ min: 1 }),
     check("limit", "El límite debe ser un entero entre 1 y 50").optional().isInt({ min: 1, max: 50 }),
     check("author", "El autor debe ser un ID válido").optional().isMongoId(),
     validarCampos
