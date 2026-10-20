@@ -7,11 +7,7 @@ import { validarCampos } from "../middlewares/validarCampos.js";
 
 const router = Router();
 
-router.post("/", [
-  validarJWT,
-  check("book", "El libro debe ser un ID válido").isMongoId(),
-  validarCampos
-], createLoan);
+router.post("/", [ validarJWT,check("book", "El libro debe ser un ID válido").isMongoId(),validarCampos], createLoan);
 
 router.get("/me", [
   validarJWT
@@ -22,8 +18,7 @@ router.get("/overdue", [
   tieneRol("ADMIN")
 ], getOverdueLoans);
 
-router.get("/", [
-  validarJWT,
+router.get("/", [validarJWT,
   tieneRol("ADMIN"),
   check("status", "El estado debe ser ACTIVE o RETURNED").optional().isIn(["ACTIVE", "RETURNED"]),
   validarCampos

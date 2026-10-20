@@ -5,7 +5,7 @@ import {
   register,
   login,
   me
-} from "../controllers/auth.controllers.js";
+} from "../controllers/auth.controller.js";
 
 import { validarCampos } from "../middlewares/validarCampos.js";
 import { validarJWT } from "../middlewares/validarJwt.js";
